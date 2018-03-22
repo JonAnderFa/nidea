@@ -37,7 +37,7 @@ public class MesaController extends HttpServlet {
 			m.setDimension(dimension);
 
 			int material = Integer.parseInt(sMaterial);
-			m.setMaterial(material);
+			m.setMaterial(material) ;
 		}
 
 		// Enviar atributos a la JSP
