@@ -19,13 +19,15 @@ public class Mesa {
 	public static final int MATERIAL_ACERO = 2;
 	public static final int MATERIAL_ALUMINO = 3;
 	public static final int MATERIAL_PLASTICO = 4;
-	// public static final [][] MATERIALES = [][];
+	public static final String[] MATERIAL_LISTA = { "Madera", "Acero", "Aluminio", "Plastico" };
+	public static final int[] MATERIAL_LISTA_CODIGO = { 1, 2, 3, 4 };
 
 	// Atributos siempre en private para mantener la encapsulacion
 	private int numeroPatas;
 	private int dimension; // metros cuadrados
 	private String color;
 	private int material;
+	private boolean custom;
 
 	/*
 	 * Metodos Constructores Getters y setters Otros Metodos
@@ -39,15 +41,13 @@ public class Mesa {
 		super();
 		this.setNumeroPatas(4);
 		this.setDimension(1);
-		this.setColor("blanco");
+		this.setColor("#ffffff");
 		this.setMaterial(1);
+		this.setCustom(false);
 	}
 
 	public Mesa(int material) {
 		this();
-		this.setNumeroPatas(4);
-		this.setDimension(1);
-		this.setColor("blanco");
 		this.setMaterial(material);
 	}
 
@@ -57,10 +57,13 @@ public class Mesa {
 		this.setNumeroPatas(numeroPatas);
 		this.setDimension(dimension);
 		this.setColor(color);
-		this.setMaterial(material);
 	}
 
 	// Getter
+	public boolean isCustom() {
+		return custom;
+	}
+
 	public int getNumeroPatas() {
 		return numeroPatas;
 	}
@@ -78,6 +81,10 @@ public class Mesa {
 	}
 
 	// Setter
+	public void setCustom(boolean custom) {
+		this.custom = custom;
+	}
+
 	/**
 	 * Sirve para documentar con JavaDoc
 	 * 
@@ -125,7 +132,7 @@ public class Mesa {
 		// Sumamos las dimensiones
 		precio = precio + (getDimension() * PRECIO_M2);
 		// color
-		if (getColor().equals(PRECIO_COLOR_NAME_CUSTOM)) {
+		if (isCustom()) {
 			precio = precio + PRECIO_COLOR_CUSTOM;
 
 		}

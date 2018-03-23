@@ -27,6 +27,8 @@ public class MesaController extends HttpServlet {
 		String sPatas = request.getParameter("patas");
 		String sDimension = request.getParameter("dimension");
 		String sMaterial = request.getParameter("material");
+		String sCustom = request.getParameter("custom");
+		String sColor = request.getParameter("color");
 		// Si parametro son NULL recoger y crear
 		if (sPatas != null) {
 
@@ -37,7 +39,15 @@ public class MesaController extends HttpServlet {
 			m.setDimension(dimension);
 
 			int material = Integer.parseInt(sMaterial);
-			m.setMaterial(material) ;
+			m.setMaterial(material);
+
+			if (sCustom == null) {
+				m.setCustom(false);
+				sColor = "#ffffff";
+			} else { // viene 'on'
+				m.setCustom(true);
+			}
+			m.setColor(sColor);
 		}
 
 		// Enviar atributos a la JSP
