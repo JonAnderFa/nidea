@@ -4,7 +4,12 @@
 <br>
 <%
 //Recoger atributo del controlador, si es que existe
-Mesa mesa = (Mesa)request.getAttribute("mesa");
+
+	// recoger atributo del controlador, si es que existe
+	Mesa mesa = (Mesa)request.getAttribute("mesa");
+	String[] materiales = (String[])request.getAttribute("materiales");
+	int[] materialesCodigo = (int[])request.getAttribute("materialesCodigo");
+	
 %>
 <div onchange="cambiar()">
 	<p>Precio <%= mesa.getPrecio() %> &euro;</p>
@@ -17,17 +22,17 @@ Mesa mesa = (Mesa)request.getAttribute("mesa");
 				<label for="dimension">Dimension en m2:</label>
 				<input type="number" name="dimension" value="<%=mesa.getDimension() %>" required>
 			</div>
-			<div class="form-group">
-			    <label for="exampleFormControlSelect1">Selecciona el material</label>
-			    <select class="form-control" id="material" name="material" >
-			    <%for (int i = 0; i < Mesa.MATERIAL_LISTA.length; i++){ %>
-			    	<option value="<%= Mesa.MATERIAL_LISTA_CODIGO[i] %>"
-			    	<%=(mesa.getMaterial()== Mesa.MATERIAL_LISTA_CODIGO[i])?"selected":"" %>>
-			    	<%=Mesa.MATERIAL_LISTA[i] %>
-			    	</option>
-			    <%} %>
-			    </select>
-		  	</div>
+			<div class="form-group row">
+			<label for="material" class="col-sm-4 col-form-label">Selecciona Material:</label>
+			<select name="material" class="col-sm-6  form-control">
+				<% for ( int i=0; i < materiales.length; i++ ) { %>
+					<option value="<%=materialesCodigo[i]%>" 
+					        <%=(mesa.getMaterial().getId()==materialesCodigo[i])?"selected":""%>>
+						<%=materiales[i]%>
+					</option>
+				<% } %>
+			</select>
+</div> 
 		  	<div class="form-group" >
 				<p>Color: <input type="color"  disabled value="<%=mesa.getColor() %>"></p>
 				<p>¿ Quieres Personalizar el Color ? 

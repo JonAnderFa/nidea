@@ -8,6 +8,7 @@
 		
 		%>
 	<h2>Hello <%=nombre %></h2>
-	<a href="generar-mesa">¿Quieres comprar una mesa?</a>
+	<a href="generar-mesa">¿Quieres comprar una mesa?</a><br>
+	<a href="calculadora">Calculadora</a>
 	<p><%= hora %></p>
 <jsp:include page="templates/footer.jsp"></jsp:include>
