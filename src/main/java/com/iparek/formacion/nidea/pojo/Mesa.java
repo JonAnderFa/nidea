@@ -115,7 +115,7 @@ public class Mesa implements Cloneable {
 	public static final int PRECIO_PATA = 1;
 	public static final int PRECIO_M2 = 5;
 	public static final int PRECIO_COLOR_CUSTOM = 23;
-	public static final String COLOR_POR_DEFECTO = "#ffffff";
+	public static final String COLOR_POR_DEFECTO = "#FFF";
 
 	// 4. Atributos siempre PRIVATE para mantener la encapsulacion
 	private int numeroPatas;
@@ -166,14 +166,18 @@ public class Mesa implements Cloneable {
 	}
 
 	/**
-	 * Si numeroPatas < 0 asignamos valor 1, else numeroPatas
+	 * Seteamos el numero de patas de la Mesa
 	 * 
 	 * @param numeroPatas
 	 *            int
+	 * @throws MesaException
+	 *             lanza exception si numeroPatas <=0
 	 */
-	public void setNumeroPatas(int numeroPatas) {
-
-		this.numeroPatas = (numeroPatas <= 0) ? 1 : numeroPatas;
+	public void setNumeroPatas(int numeroPatas) throws MesaException {
+		if (numeroPatas <= 0) {
+			throw new MesaException(MesaException.MENSAJE_PATAS);
+		}
+		this.numeroPatas = numeroPatas;
 	}
 
 	public int getDimension() {
@@ -206,11 +210,11 @@ public class Mesa implements Cloneable {
 	 * Calculamos el precio de la mesa en funcion de los materiales usados.
 	 * 
 	 * @see consultar todas las constantes definidas para los precios
-	 * @return int precio en €
+	 * @return float precio en €
 	 */
-	public int getPrecio() {
+	public float getPrecio() {
 
-		int resul = 0;
+		float resul = 0;
 
 		resul += this.numeroPatas * PRECIO_PATA;
 		resul += this.dimension * PRECIO_M2;
